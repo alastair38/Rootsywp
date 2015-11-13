@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= item.title.rendered
+  if item.featured_image != 0
+    img(src='#{item.better_featured_image.source_url}')
+  
+  .content!= item.content.rendered
+  
+  if item.title.rendered == "Blog"
+    each post in records.posts
+      h3
+        a(href='post/#{post.slug}') #{post.title.rendered}

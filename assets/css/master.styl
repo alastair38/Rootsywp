@@ -1,0 +1,44 @@
+@import '_settings'
+
+normalize-css()
+base()
+
+a
+  text-decoration: none
+  &:hover, &:focus
+    text-decoration: underline
+
+body
+  font-size: 1.5em
+  padding: 50px
+
+nav
+  background: tomato
+  padding: 1em
+  margin-bottom: 1em
+  a
+    padding: 10px 10px 10px 0
+    color: white
+
+ul
+  display: flex
+  margin-left: 0
+  padding-left: 0
+
+#latest
+  font-size: 2em
+  border: 1px solid #f3f3f3
+  li
+    background: #f3f3f3
+    text-align: center
+    a
+      &:visited
+        color: inherit
+        outline: 1px dotted
+
+li
+  flex: 1
+  list-style-type: none
+  margin: 1em
+  padding: .5em
+  background: white
