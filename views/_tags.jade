@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= item.name
+  
+  p These are the latest posts in the #{item.name} category. View any of the individual articles by clicking the relevant link
+
+  ul#latest
+    each post in records.posts
+      if (post.acf.choose != null)
+      - var tags = post.acf.choose
+        each tag in tags
+          if (tag.name == item.name)
+            li
+              a(href='../post/#{post.slug}') #{post.title.rendered}

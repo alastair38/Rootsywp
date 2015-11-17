@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  article(class='#{item.type}')
+    h1= item.title.rendered
+  
+    if item.featured_image != 0
+      img(src='#{item.better_featured_image.source_url}')
+      
+    .content!= item.content.rendered
+    
+  ul#latest
+    each post in records.posts
+      if (post.acf.cat == "Testing")
+        li  
+          a(href='post/#{post.slug}') #{post.title.rendered}
+    
+    if item.title.rendered == "Blog"
+      each post in records.posts
+        li
+          a(href='post/#{post.slug}') #{post.title.rendered}

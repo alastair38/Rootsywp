@@ -1,16 +1,14 @@
 extends layout
 
 block content
-  ul#latest
-    each post in records.posts
-      li
-        a(href='post/#{post.slug}') #{post.title.rendered}
-  
-  ul#latest      
-    each post in records.pages
-      if (post.title.rendered == "Events" || post.title.rendered == "People")
+
+    ul#latest
+      each post in records.posts
         li
-          a(href='/#{post.slug}') #{post.title.rendered}
-      
-  :marked
-    ## This is a test integration of Roots and Wordpress, using WP as a backend for authoring content, then piping this via JSON for static compilation
+          a(href='post/#{post.slug}') #{post.title.rendered}
+       
+    ul#latest      
+      each post in records.pages
+        if (post.title.rendered == "Events" || post.title.rendered == "People")
+          li
+            a(href='/#{post.slug}') #{post.title.rendered}

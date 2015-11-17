@@ -8,7 +8,7 @@ html
     meta(name='author', content= "author of the site")
     //- uncomment if your site is responsive!
     //- meta(name="viewport" content="width=device-width, initial-scale=1")
-    title= "Testing WP/Roots " + item.title.rendered
+    title= "Testing WP/Roots "
     link(href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css')
     != css('/')
 
@@ -19,5 +19,5 @@ html
         if post.title.rendered != "Home"
           a(href='/#{post.slug}') #{post.title.rendered}
     block content
-
+      article(class='#{item.type}')
     != js('/')

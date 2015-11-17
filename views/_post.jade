@@ -1,13 +1,42 @@
 extends layout
 
 block content
-  h1= item.title.rendered
-  if item.featured_image != 0
-    img(src='#{item.better_featured_image.source_url}')
+  article(class='#{item.type}')
+    h1= item.title.rendered
+    - var d = new Date(item.date);
+    span= d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " / "
+
+    span#meta Written by 
+      a(href='/user/#{item._embedded.author[0].slug}') #{item._embedded.author[0].name}
+
+    if item.featured_image != 0
+      img(src='#{item.better_featured_image.source_url}')
+      
+    .content!= item.content.rendered
+    
+    if (item.acf.choose != null)
+      ul#latest Tags
+        each choice in item.acf.choose
+          li
+            a(href='/tag/#{choice.slug}') #{choice.name}
   
-  .content!= item.content.rendered
+  //each choice in a
+  //  p!= choice.name
   
+  //- ul#latest
+  //-   - var i = 0
+  //-   if (item.acf.choose != null)
+  //-     each post in records.posts
+  //-       - var tags = item.acf.choose
+  //-       - var target = post.acf.choose
+  //-       while i < tags.length
+  //-         - var i = i++
+  //-           if (tags.indexOf(target[i]) > -1)
+  //-             li  
+  //-               a(href='post/#{post.slug}') #{post.title.rendered}
+      
   if item.title.rendered == "Blog"
-    each post in records.posts
-      h3
-        a(href='post/#{post.slug}') #{post.title.rendered}
+    ul#latest
+      each post in records.posts
+        li
+          a(href='post/#{post.slug}') #{post.title.rendered}

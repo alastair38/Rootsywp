@@ -10,9 +10,9 @@ module.exports =
   ignores: ['readme.md', '**/layout.*', '**/_*', '.gitignore', 'ship.*conf']
 
   extensions: [
+    dynamic_content(),
     js_pipeline(files: 'assets/js/*.coffee'),
     css_pipeline(files: 'assets/css/*.styl'),
-    dynamic_content(),
     records(
       posts:
         url: 'http://sandbox.alastaircox.com/wp-json/wp/v2/posts?_embed',
@@ -20,8 +20,16 @@ module.exports =
         out: (post) -> "/post/#{(post.slug)}"
       pages:
         url: 'http://sandbox.alastaircox.com/wp-json/wp/v2/pages',
-        template: "views/_post.jade",
+        template: "views/_page.jade",
         out: (post) -> "/#{(post.slug)}"
+      tags:
+        url: 'http://sandbox.alastaircox.com/wp-json/wp/v2/terms/tag?per_page=25',
+        template: "views/_tags.jade",
+        out: (post) -> "/tag/#{(post.slug)}"
+      users:
+        url: 'http://sandbox.alastaircox.com/wp-json/wp/v2/users',
+        template: "views/_users.jade",
+        out: (post) -> "/user/#{(post.slug)}"
     )
   ]
 
