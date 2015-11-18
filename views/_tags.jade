@@ -1,11 +1,14 @@
 extends layout
 
 block content
+
+  - var pageTitle = item.name
+  
   h1= item.name
   
   p These are the latest posts in the #{item.name} category. View any of the individual articles by clicking the relevant link
 
-  ul#latest
+  ul#extras
     each post in records.posts
       if (post.acf.choose != null)
       - var tags = post.acf.choose

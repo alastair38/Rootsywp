@@ -2,13 +2,15 @@ extends layout
 
 block content
 
+    h2 Latest
     ul#latest
       each post in records.posts
         li
           a(href='post/#{post.slug}') #{post.title.rendered}
-       
-    ul#latest      
+    
+    h2 Pages   
+    ul#extras      
       each post in records.pages
-        if (post.title.rendered == "Events" || post.title.rendered == "People")
+        if (post.title.rendered == "Events" || post.title.rendered == "People" || post.title.rendered == "Project")
           li
             a(href='/#{post.slug}') #{post.title.rendered}

@@ -1,11 +1,12 @@
 extends layout
 
 block content
+
   h1= item.name
   
   p These are the latest posts written by #{item.name}. View any of the individual articles by clicking the relevant link
 
-  ul#latest
+  ul#extras
     each post in records.posts
       if (post._embedded.author[0].name == item.name)
         li

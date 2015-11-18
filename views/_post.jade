@@ -1,10 +1,11 @@
 extends layout
 
 block content
+
   article(class='#{item.type}')
     h1= item.title.rendered
     - var d = new Date(item.date);
-    span= d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " / "
+    span= 'Posted on ' + d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear() + " / "
 
     span#meta Written by 
       a(href='/user/#{item._embedded.author[0].slug}') #{item._embedded.author[0].name}
@@ -15,7 +16,8 @@ block content
     .content!= item.content.rendered
     
     if (item.acf.choose != null)
-      ul#latest Tags
+      h2 Tags
+      ul#extras
         each choice in item.acf.choose
           li
             a(href='/tag/#{choice.slug}') #{choice.name}

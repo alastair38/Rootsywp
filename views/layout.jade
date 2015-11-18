@@ -4,20 +4,47 @@ html
   head
     meta(charset='utf8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge, chrome=1')
-    meta(name='description', content='description of your site')
-    meta(name='author', content= "author of the site")
+    meta(name='#{config.site_name}', content='#{config.site_description}')
+    meta(name='#{config.site_owner}', content= "author of the site")
     //- uncomment if your site is responsive!
     //- meta(name="viewport" content="width=device-width, initial-scale=1")
-    title= "Testing WP/Roots "
-    link(href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css')
+    
+    
+    - if (_path == "/index.html")
+      title= config.site_name + " - Home"
+      
+    - if (item.name != null)
+      title= config.site_name + " - " + item.name
+      
+    - if (item.title != null)
+      title= config.site_name + " - " + item.title.rendered
+    
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
+    link(href='https://fonts.googleapis.com/css?family=Advent+Pro' rel='stylesheet' type='text/css')
     != css('/')
 
   body
-    nav
-      a(href='/') Home
-      each post in records.pages
-        if post.title.rendered != "Home"
-          a(href='/#{post.slug}') #{post.title.rendered}
+    - if (_path == "/index.html")
+      nav#home
+        a(href='/') Home
+        each post in records.pages
+          if post.title.rendered != "Home"
+            a(href='/#{post.slug}') #{post.title.rendered}
+    - else
+      nav
+        a(href='/') Home
+        each post in records.pages
+          if post.title.rendered != "Home"
+            a(href='/#{post.slug}') #{post.title.rendered}
+            
     block content
       article(class='#{item.type}')
     != js('/')
+    
+    script.
+      if (location.pathname !== '/') {
+      $("a[href*='" + location.pathname + "']").addClass("active");
+      } else {
+      var home = document.getElementById("home").getElementsByTagName('a')[0];
+      home.className = 'active';
+      }
